@@ -236,5 +236,26 @@ create trigger insert_posts_trigger_for_user_forums_optimization
     for each row
 execute procedure update_users_forums_optimization();
 
+-- обновление данных в users_forums при обновлении пользователя в users
+
+create or replace function update_users_forums_after_update_user()
+returns trigger as $$
+begin
+    update users_forums
+    set fullname = new.fullname,
+        about = new.about,
+        email = new.email
+    where nickname = new.nickname;
+
+    return new;
+end;
+$$ language plpgsql;
+
+create trigger update_users_forums_trigger
+after update on users
+for each row
+execute function update_users_forums_after_update_user();
+
+
 vacuum analyse;
 

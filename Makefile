@@ -9,4 +9,4 @@ fill:
 	curl -vvv -X POST http://localhost:5000/api/service/clear
 	time ./technopark-dbms-forum fill -u http://localhost:5000/api/
 perf:
-	./technopark-dbms-forum perf -u http://localhost:5000/api/  --duration=60 --step=4
+	./technopark-dbms-forum perf -u http://localhost:5000/api/  --duration=60 --step=4 -v=1
