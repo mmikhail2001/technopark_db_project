@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os/signal"
@@ -56,8 +57,8 @@ func Run() error {
 		return fmt.Errorf("fail to parse config yml file: %w", err)
 	}
 
-	// log.SetOutput(ioutil.Discard)
-	log.SetFlags(log.LstdFlags | log.Llongfile)
+	log.SetOutput(ioutil.Discard)
+	// log.SetFlags(log.LstdFlags | log.Llongfile)
 
 	client, err := sqltools.NewClientPostgres(cfg.Postgres)
 	if err != nil {
