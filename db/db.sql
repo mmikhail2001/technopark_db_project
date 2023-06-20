@@ -59,11 +59,11 @@ create unlogged table votes (
 
 create unlogged table users_forums (
     nickname citext collate "ucs_basic" not null references users(nickname) on delete cascade,
-    email citext not null unique,
+    email citext not null,
     fullname text not null,
     about text,
     forum citext not null references forums(slug) on delete cascade,
-    primary key(nickname, forum)
+    unique(nickname, forum)
 );
 
 create index forums_author_idx on forums(author);
